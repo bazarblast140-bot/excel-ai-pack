@@ -42,13 +42,23 @@ ol li{margin:6px 0}details{background:#fff;border:1px solid #dfe9e2;border-radiu
 footer{padding:24px 0;font-size:.95rem;color:#444}footer a{color:#0f6b3a}
 .sticky{position:fixed;left:0;right:0;bottom:0;background:#fff;padding:10px 14px;box-shadow:0 -2px 10px #0002}.sticky .btn{max-width:720px;margin:auto;padding:12px}
 @media(min-width:900px){.sticky{display:none}body{padding-bottom:0}.g{grid-template-columns:repeat(3,1fr)}}
+#checkout{padding:24px 0;border:0}.co{background:linear-gradient(135deg,#fff7e6,#e8fff1 55%,#eef2ff);border:2px solid #f59e0b;border-radius:18px;padding:16px;box-shadow:0 8px 24px #0f6b3a22}
+.co-top{display:flex;gap:12px;align-items:center}.co-top img{width:84px;height:84px;border-radius:12px;box-shadow:0 3px 10px #0003;flex:none}
+.co h2{margin:0;font-size:1.2rem}.co .pr{font-size:2rem;font-weight:900;color:#0f6b3a;line-height:1}.co .pr s{font-size:1rem;color:#999;font-weight:600}
+.co ul{list-style:none;padding:0;margin:12px 0}.co li{padding:3px 0}.co label{display:block;font-weight:700;font-size:.9rem;margin:10px 0 4px}
+.co input{width:100%;font-size:1.05rem;padding:13px;border:2px solid #cfe0d5;border-radius:12px;background:#fff}.co input:focus{outline:0;border-color:#7c3aed}
+.ph{display:flex}.ph span{padding:13px 10px;background:#eef2ff;border:2px solid #cfe0d5;border-right:0;border-radius:12px 0 0 12px;font-weight:700}.ph input{border-radius:0 12px 12px 0}
+.err{color:#c62828;font-size:.85rem;min-height:1.1em;margin:4px 0 0}
+.pay{width:100%;margin-top:12px;border:0;cursor:pointer;background:linear-gradient(90deg,#16a34a,#0f766e);color:#fff;font-weight:900;font-size:1.25rem;padding:16px;border-radius:14px;box-shadow:0 4px 0 #065f46;animation:pl 1.8s infinite}
+@keyframes pl{50%{transform:scale(1.025)}}.upi{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0 6px}
+.upi b{font-size:.78rem;padding:5px 9px;border-radius:20px;color:#fff}.trust{text-align:center;font-size:.85rem;color:#334;margin:4px 0 0}
 </style></head><body>
 <header class="hero"><div class="w"><span class="tag">आसान हिंदी • Beginners ke liye</span>
 <h1>दुकान और ऑफ़िस का हिसाब अब रजिस्टर में नहीं, <span style="color:#0f6b3a">Excel</span> में!</h1>
 <p>Bikri, udhaar khata, attendance, GST bill – step-by-step Hindi guide + ChatGPT/Gemini se formula likhwana seekhiye.</p>
 <img src="img/cover.webp" width="600" height="600" alt="Excel + AI Hindi Starter Pack cover">
 <div class="price">सिर्फ़ ₹99</div><p style="margin-top:0">32-page PDF guide + 5 practice Excel files • Instant download</p>
-<a class="btn" href="https://rzp.io/rzp/aipsZWI" onclick="fbq('track','InitiateCheckout',{value:99.00,currency:'INR',content_name:'Excel + AI Hindi Starter Pack'});">Abhi ₹99 mein khariden →</a><p style="font-size:.85rem">Secure payment Razorpay se • UPI / Card</p></div></header>
+<a class="btn" href="#checkout">Abhi ₹99 mein khariden →</a><p style="font-size:.85rem">Secure payment Razorpay se • UPI / Card</p></div></header>
 <main class="w">
 <section><h2>Andar kya milega</h2><ul class="ck">
 <li><b>32 page ki simple Hindi guide</b> (PDF) – zero se shuru</li>
@@ -71,8 +81,29 @@ footer{padding:24px 0;font-size:.95rem;color:#444}footer a{color:#0f6b3a}
 <div class="card"><b>2. Salary / attendance sheet</b><br>Hazri register mein COUNTIF se present/absent din gino, aur IF se salary calculation – practice file ke saath.</div>
 <div class="card"><b>3. ChatGPT se formula</b><br>Hindi mein likho “mujhe column B ka total chahiye jahan column A mein 'Chai' ho” – ready prompts se ChatGPT/Gemini formula bana dega.</div></section>
 <section><h2>Kaise milega</h2><ol>
-<li>Neeche button dabayein – Razorpay page khulega</li><li>UPI ya card se ₹99 pay karein</li><li>Payment ke baad turant download link milega – PDF + Excel files</li></ol>
-<a class="btn" href="https://rzp.io/rzp/aipsZWI" onclick="fbq('track','InitiateCheckout',{value:99.00,currency:'INR',content_name:'Excel + AI Hindi Starter Pack'});">Abhi ₹99 mein khariden →</a></section>
+<li>Neeche Email + Phone bharein aur button dabayein</li><li>UPI ya card se ₹99 pay karein</li><li>Payment ke baad turant download link milega – PDF + Excel files</li></ol>
+<a class="btn" href="#checkout">Abhi ₹99 mein khariden →</a></section>
+<section id="checkout"><div class="co">
+<div class="co-top"><img src="img/cover.webp" width="84" height="84" alt="Pack cover"><div><h2>Excel + AI Hindi Starter Pack</h2><div class="pr">₹99</div></div></div>
+<ul><li>📘 32-page आसान हिंदी PDF guide</li><li>📊 5 ready practice Excel files</li><li>🤖 ChatGPT/Gemini formula prompts</li></ul>
+<form id="cof" novalidate>
+<label for="em">📧 Email (download link yahan aayega)</label><input id="em" type="email" inputmode="email" autocomplete="email" placeholder="aapka@gmail.com" required>
+<label for="phn">📱 Mobile number</label><div class="ph"><span>+91</span><input id="phn" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="98XXXXXXXX" required></div>
+<p class="err" id="er"></p>
+<button class="pay" type="submit">⚡ UPI se ₹99 Pay karein</button></form>
+<div class="upi"><b style="background:#5f259f">PhonePe</b><b style="background:#1a73e8">GPay</b><b style="background:#00baf2">Paytm</b><b style="background:#ff7a00">BHIM UPI</b><b style="background:#555">Card</b></div>
+<p class="trust">🔒 Secure by Razorpay • ⚡ Payment ke turant baad download link</p>
+</div></section>
+<script>
+document.getElementById('cof').addEventListener('submit',function(e){e.preventDefault();
+var em=document.getElementById('em').value.trim(),ph=document.getElementById('phn').value.replace(/\D/g,'').slice(-10),er=document.getElementById('er');
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){er.textContent='Sahi email daalein';return}
+if(!/^[6-9]\d{9}$/.test(ph)){er.textContent='10 digit mobile number daalein';return}
+er.textContent='';
+try{fbq('track','InitiateCheckout',{value:99.00,currency:'INR',content_name:'Excel + AI Hindi Starter Pack'})}catch(x){}
+var u='https://pages.razorpay.com/pl_ToaPkUzSQWDGHi/view?email='+encodeURIComponent(em.toLowerCase())+'&phone='+ph;
+setTimeout(function(){location.href=u},300)});
+</script>
 <section><h2>Aksar pooche jaane wale sawaal</h2>
 <details><summary>Kya mobile pe khulega?</summary>Haan. Guide PDF hai aur practice files Excel (.xlsx) hain – mobile, Google Sheets aur computer sab par khulti hain.</details>
 <details><summary>Payment safe hai?</summary>Payment Razorpay ke secure page par hota hai – UPI, card waghera se.</details>
@@ -81,5 +112,5 @@ footer{padding:24px 0;font-size:.95rem;color:#444}footer a{color:#0f6b3a}
 </section></main>
 <footer class="w"><b>Seller:</b> Rajesh Kumar<br><b>Support:</b> <a href="mailto:bazarblast140@gmail.com">bazarblast140@gmail.com</a> • <a href="tel:+919118606518">+91 9118606518</a> (<a href="https://wa.me/919118606518">WhatsApp</a>)<br>
 <small>Yeh ek digital product hai; payment ke baad download link milega. Kisi bhi samasya ya support ke liye email/phone karein.</small></footer>
-<div class="sticky"><a class="btn" href="https://rzp.io/rzp/aipsZWI" onclick="fbq('track','InitiateCheckout',{value:99.00,currency:'INR',content_name:'Excel + AI Hindi Starter Pack'});">Abhi ₹99 mein khariden</a></div>
+<div class="sticky"><a class="btn" href="#checkout">Abhi ₹99 mein khariden</a></div>
 </body></html>
