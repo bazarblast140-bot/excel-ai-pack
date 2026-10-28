@@ -1,0 +1,93 @@
+<!doctype html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Payment Successful – Excel + AI Hindi Starter Pack</title>
+<meta name="description" content="Payment successful. Download link check your email. Excel + AI Hindi Starter Pack ₹99.">
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:title" content="Payment Successful – Excel + AI Hindi Starter Pack">
+<meta property="og:url" content="https://bazarblast140-bot.github.io/excel-ai-pack/thank-you.html">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1690255725618467');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1690255725618467&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Devanagari",sans-serif;color:#1d2a22;background:#f6faf7;line-height:1.55}
+.w{max-width:560px;margin:auto;padding:28px 18px;text-align:center}
+.card{background:#fff;border:2px solid #0f6b3a;border-radius:18px;padding:28px 20px;box-shadow:0 8px 24px #0f6b3a22}
+.ok{font-size:3rem;margin:0}.h{font-size:1.5rem;color:#0f6b3a;margin:.3em 0}.p{color:#334;margin:10px 0}
+.btn{display:inline-block;background:#16a34a;color:#fff;font-weight:800;padding:12px 18px;border-radius:12px;text-decoration:none;margin:6px}
+.btn2{background:#25d366;color:#fff}.btn3{background:#f59e0b;color:#1d1d1d}
+.small{font-size:.85rem;color:#555;margin-top:18px}code{background:#eef2ff;padding:2px 6px;border-radius:6px;font-size:.8rem}
+a{color:#0f6b3a}
+</style></head><body>
+<div class="w"><div class="card">
+<p class="ok" aria-hidden="true">✅</p>
+<h1 class="h">Payment Successful!</h1>
+<p class="p"><b>Excel + AI Hindi Starter Pack</b> (₹99) ke liye shukriya.</p>
+<p class="p">Download link aapke <b>email</b> par jaayega (Razorpay / seller). Spam folder bhi check karein.</p>
+<p class="p">Link nahi mila? WhatsApp ya email karke payment ID bhejein — hum madad karenge.</p>
+<p>
+<a class="btn btn2" href="https://wa.me/919118606518?text=Excel%20pack%20payment%20done%20-%20download%20link%20chahiye">WhatsApp Support</a>
+<a class="btn" href="mailto:bazarblast140@gmail.com?subject=Excel%20pack%20download">Email Support</a>
+</p>
+<p class="small" id="pidLine" hidden>Payment ID: <code id="pid"></code></p>
+<p class="small"><a href="./">← Wapas landing page</a></p>
+</div></div>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search);
+  var paymentId=(q.get('razorpay_payment_id')||q.get('payment_id')||q.get('razorpay_order_id')||'').trim();
+  var eventId=paymentId||'';
+  var STORAGE_KEY='excel99_purchase_fired';
+  function alreadyFired(id){
+    try{
+      var raw=localStorage.getItem(STORAGE_KEY);
+      if(!raw)return false;
+      var map=JSON.parse(raw);
+      if(id&&map[id])return true;
+      // no payment id: block re-fire within 24h on same browser
+      if(!id&&map._anon&&(Date.now()-map._anon)<86400000)return true;
+      return false;
+    }catch(e){return false}
+  }
+  function markFired(id){
+    try{
+      var map={};
+      try{map=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')||{}}catch(e){}
+      if(id)map[id]=Date.now();
+      else map._anon=Date.now();
+      localStorage.setItem(STORAGE_KEY,JSON.stringify(map));
+    }catch(e){}
+  }
+  if(paymentId){
+    document.getElementById('pid').textContent=paymentId;
+    document.getElementById('pidLine').hidden=false;
+  }
+  // Thank-you is only for successful Razorpay redirect; fire Purchase once (dedupe by payment id / eventID).
+  if(alreadyFired(eventId||null))return;
+  var opts={};
+  if(eventId)opts.eventID=eventId;
+  try{
+    fbq('track','Purchase',{
+      value:99.00,
+      currency:'INR',
+      content_name:'Excel + AI Hindi Starter Pack',
+      content_type:'product',
+      contents:[{id:'excel-ai-hindi-starter',quantity:1}]
+    },opts);
+    markFired(eventId||null);
+  }catch(e){}
+})();
+</script>
+</body></html>

@@ -1,0 +1,29 @@
+# Fires Meta CAPI Purchase for recent ₹99 Razorpay captures.
+# Requires repo secrets: META_CAPI_TOKEN, RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET
+# Does nothing useful until META_CAPI_TOKEN is set (script dry-runs).
+name: CAPI Purchase poll
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Poll Razorpay → Meta CAPI
+        env:
+          META_CAPI_TOKEN: ${{ secrets.META_CAPI_TOKEN }}
+          META_PIXEL_ID: "1690255725618467"
+          RAZORPAY_KEY_ID: ${{ secrets.RAZORPAY_KEY_ID }}
+          RAZORPAY_KEY_SECRET: ${{ secrets.RAZORPAY_KEY_SECRET }}
+          META_TEST_EVENT_CODE: ${{ secrets.META_TEST_EVENT_CODE }}
+        run: |
+          if [ -z "$META_CAPI_TOKEN" ]; then
+            echo "META_CAPI_TOKEN secret missing — scaffold dry-run only. See tools/CAPI_SETUP.md"
+          fi
+          if [ -z "$RAZORPAY_KEY_ID" ] || [ -z "$RAZORPAY_KEY_SECRET" ]; then
+            echo "Razorpay secrets missing — skip poll"
+            exit 0
+          fi
+          python3 tools/capi_purchase.py --poll --minutes 45
