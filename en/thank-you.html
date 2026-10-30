@@ -16,6 +16,7 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1690255725618467');
 fbq('track', 'PageView');
+try{if(!localStorage.getItem('lef_en_purchase')){fbq('track','Purchase',{value:7.00,currency:'USD',content_name:'Learn Excel Fast'});localStorage.setItem('lef_en_purchase','1');}}catch(e){fbq('track','Purchase',{value:7.00,currency:'USD',content_name:'Learn Excel Fast'});}
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1690255725618467&ev=PageView&noscript=1"
