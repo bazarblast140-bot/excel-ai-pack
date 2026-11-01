@@ -102,28 +102,19 @@ section:nth-of-type(6n) h2{background:linear-gradient(90deg,#f97316,#eab308)}
 <div class="card"><b>2. Salary / attendance sheet</b><br>Hazri register mein COUNTIF se present/absent din gino, aur IF se salary calculation – practice file ke saath.</div>
 <div class="card"><b>3. ChatGPT se formula</b><br>Hindi mein likho “mujhe column B ka total chahiye jahan column A mein 'Chai' ho” – ready prompts se ChatGPT/Gemini formula bana dega.</div></section>
 <section><h2>🚀 Kaise milega</h2><ol>
-<li>Neeche Email + Phone bharein aur button dabayein</li><li>UPI ya card se ₹99 pay karein</li><li>Payment ke baad turant download link milega – PDF + Excel files</li></ol>
+<li>Neeche "Pay Now" button dabayein</li><li>UPI ya card se ₹99 pay karein</li><li>Payment ke baad turant download link milega – PDF + Excel files</li></ol>
 <a class="btn" href="#checkout">🛒 Abhi khariden <span class="badge">₹99</span></a></section>
 <section id="checkout"><div class="co">
 <div class="co-top"><img src="img/cover.webp" width="84" height="84" alt="Pack cover"><div><h2>Excel + AI Hindi Starter Pack</h2><div class="pr">₹99</div></div></div>
 <ul><li>📘 32-page आसान हिंदी PDF guide</li><li>📊 5 ready practice Excel files</li><li>🤖 ChatGPT/Gemini formula prompts</li></ul>
-<form id="cof" novalidate>
-<label for="em">📧 Email (download link yahan aayega)</label><input id="em" type="email" inputmode="email" autocomplete="email" placeholder="aapka@gmail.com" required>
-<label for="phn">📱 Mobile number</label><div class="ph"><span>+91</span><input id="phn" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="98XXXXXXXX" required></div>
-<p class="err" id="er"></p>
-<button class="pay" type="submit">⚡ UPI se ₹99 Pay karein</button></form>
+<div id="rzpbtn" style="text-align:center;margin:14px 0"><form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_TuxhxMgITxpLb2" async> </script> </form></div>
+<p style="text-align:center;font-size:.85rem;margin:6px 0">Payment page nahi khula? <a href="https://pages.razorpay.com/pl_ToaPkUzSQWDGHi/view" id="fallback">Yahan tap karo</a></p>
 <div class="upi"><b style="background:#5f259f">PhonePe</b><b style="background:#1a73e8">GPay</b><b style="background:#00baf2">Paytm</b><b style="background:#ff7a00">BHIM UPI</b><b style="background:#555">Card</b></div>
 <p class="trust">🔒 Secure by Razorpay • ⚡ Payment ke turant baad download link</p>
 </div></section>
 <script>
-document.getElementById('cof').addEventListener('submit',function(e){e.preventDefault();
-var em=document.getElementById('em').value.trim(),ph=document.getElementById('phn').value.replace(/\D/g,'').slice(-10),er=document.getElementById('er');
-if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){er.textContent='Sahi email daalein';return}
-if(!/^[6-9]\d{9}$/.test(ph)){er.textContent='10 digit mobile number daalein';return}
-er.textContent='';
-try{fbq('track','InitiateCheckout',{value:99.00,currency:'INR',content_name:'Excel + AI Hindi Starter Pack'})}catch(x){}
-var u='https://pages.razorpay.com/pl_ToaPkUzSQWDGHi/view?email='+encodeURIComponent(em.toLowerCase())+'&phone='+ph;
-setTimeout(function(){location.href=u},300)});
+(function(){var sent=0;function ic(){if(sent)return;sent=1;try{fbq('track','InitiateCheckout',{value:99.00,currency:'INR',content_name:'Excel + AI Hindi Starter Pack'})}catch(x){}setTimeout(function(){sent=0},5000)}
+document.getElementById('rzpbtn').addEventListener('click',ic,true);document.getElementById('fallback').addEventListener('click',ic);})();
 </script>
 <section><h2>❓ Aksar pooche jaane wale sawaal</h2>
 <details><summary>Kya mobile pe khulega?</summary>Haan. Guide PDF hai aur practice files Excel (.xlsx) hain – mobile, Google Sheets aur computer sab par khulti hain.</details>
