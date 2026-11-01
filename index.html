@@ -114,7 +114,7 @@ section:nth-of-type(6n) h2{background:linear-gradient(90deg,#f97316,#eab308)}
 </div></section>
 <script>
 (function(){var sent=0;function ic(){if(sent)return;sent=1;try{fbq('track','InitiateCheckout',{value:99.00,currency:'INR',content_name:'Excel + AI Hindi Starter Pack'})}catch(x){}setTimeout(function(){sent=0},5000)}
-document.getElementById('rzpbtn').addEventListener('click',ic,true);document.getElementById('fallback').addEventListener('click',ic);})();
+document.getElementById('rzpbtn').addEventListener('click',function(){if(!window.__rzpFromBuy)ic()},true);document.getElementById('fallback').addEventListener('click',ic);})();
 </script>
 <section><h2>❓ Aksar pooche jaane wale sawaal</h2>
 <details><summary>Kya mobile pe khulega?</summary>Haan. Guide PDF hai aur practice files Excel (.xlsx) hain – mobile, Google Sheets aur computer sab par khulti hain.</details>
@@ -125,4 +125,11 @@ document.getElementById('rzpbtn').addEventListener('click',ic,true);document.get
 <footer class="w"><b>Seller:</b> Rajesh Kumar<br><b>Support:</b> <a href="mailto:bazarblast140@gmail.com">bazarblast140@gmail.com</a> • <a href="tel:+919118606518">+91 9118606518</a> (<a href="https://wa.me/919118606518">WhatsApp</a>)<br>
 <small>Yeh ek digital product hai; payment ke baad download link milega. Kisi bhi samasya ya support ke liye email/phone karein.</small><br><small><a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms</a> • <a href="refund.html">Refund Policy</a> • <a href="https://wa.me/919118606518">Contact</a></small></footer>
 <div class="sticky"><a class="btn" href="#checkout">⚡ ₹99 mein pack lo <span class="badge">UPI</span></a><small>PhonePe • GPay • Paytm • BHIM • Card – 🔒 Razorpay</small></div>
+<script>
+(function(){var FB='https://pages.razorpay.com/pl_TuxhxMgITxpLb2/view';
+function ic(){try{fbq('track','InitiateCheckout',{value:99.00,currency:'INR',content_name:'Excel + AI Hindi Starter Pack'})}catch(x){}}
+document.querySelectorAll('a.btn[href="#checkout"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();ic();
+var rb=document.querySelector('#rzpbtn .PaymentButton, #rzpbtn .razorpay-payment-button a, #rzpbtn button');
+if(rb){window.__rzpFromBuy=1;rb.click();setTimeout(function(){window.__rzpFromBuy=0},1000)}else{location.href=FB}})});})();
+</script>
 </body></html>
