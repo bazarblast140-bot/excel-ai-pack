@@ -77,8 +77,9 @@ a{color:#0f6b3a}
   var ref='';try{ref=new URL(document.referrer).hostname}catch(e){}
   var fromRzp=/(^|\.)razorpay\.com$|(^|\.)rzp\.io$/i.test(ref);
   if(paymentId){var el=document.getElementById('pid');if(el){el.textContent=paymentId;document.getElementById('pidLine').hidden=false}}
-  if(!hasRzpParam&&!fromRzp)return; // direct visitor: no Purchase
-  var KEY='excel99_purchase_fired';
+  var srcRzp=q.get('src')==='rzp';
+  if(!hasRzpParam&&!fromRzp&&!srcRzp)return; // direct visitor: no Purchase
+  var KEY='excel99_purchase_v2';
   try{if(localStorage.getItem(KEY))return}catch(e){}
   var eventId=paymentId||('rzp_'+Date.now()+'_'+Math.random().toString(36).slice(2,10));
   var tries=0;
@@ -87,6 +88,7 @@ a{color:#0f6b3a}
     try{
       fbq('track','Purchase',{value:99.00,currency:'INR',content_name:'Excel + AI Hindi Starter Pack',content_type:'product',content_ids:['excel-ai-hindi-starter']},{eventID:eventId});
       try{localStorage.setItem(KEY,JSON.stringify({id:eventId,t:Date.now()}))}catch(e){}
+      if(srcRzp){try{q.delete('src');var qs=q.toString();history.replaceState(null,'',location.pathname+(qs?'?'+qs:'')+location.hash)}catch(e){}}
     }catch(e){}
   })();
 })();
