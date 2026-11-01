@@ -79,8 +79,11 @@ a{color:#0f6b3a}
   if(paymentId){var el=document.getElementById('pid');if(el){el.textContent=paymentId;document.getElementById('pidLine').hidden=false}}
   var srcRzp=q.get('src')==='rzp';
   if(!hasRzpParam&&!fromRzp&&!srcRzp)return; // direct visitor: no Purchase
-  var KEY='excel99_purchase_v2';
-  try{if(localStorage.getItem(KEY))return}catch(e){}
+  // Dedupe per payment (not per device): same payment id never fires twice;
+  // without an id, only block a reload within 3 minutes of the last Purchase.
+  var KEY='excel99_purchase_v3';
+  try{var prev=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(prev){if(paymentId&&prev.id===paymentId)return;if(!paymentId&&Date.now()-prev.t<180000)return}}catch(e){}
   var eventId=paymentId||('rzp_'+Date.now()+'_'+Math.random().toString(36).slice(2,10));
   var tries=0;
   (function fire(){
