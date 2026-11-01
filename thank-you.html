@@ -72,46 +72,23 @@ a{color:#0f6b3a}
 <script>
 (function(){
   var q=new URLSearchParams(location.search);
-  var paymentId=(q.get('razorpay_payment_id')||'').trim();
-  var eventId=paymentId||'';
-  var STORAGE_KEY='excel99_purchase_fired';
-  function alreadyFired(id){
+  var paymentId=(q.get('razorpay_payment_id')||q.get('payment_id')||q.get('razorpay_order_id')||q.get('order_id')||'').trim();
+  var hasRzpParam=paymentId!==''||Array.from(q.keys()).some(function(k){return /^razorpay_/i.test(k)});
+  var ref='';try{ref=new URL(document.referrer).hostname}catch(e){}
+  var fromRzp=/(^|\.)razorpay\.com$|(^|\.)rzp\.io$/i.test(ref);
+  if(paymentId){var el=document.getElementById('pid');if(el){el.textContent=paymentId;document.getElementById('pidLine').hidden=false}}
+  if(!hasRzpParam&&!fromRzp)return; // direct visitor: no Purchase
+  var KEY='excel99_purchase_fired';
+  try{if(localStorage.getItem(KEY))return}catch(e){}
+  var eventId=paymentId||('rzp_'+Date.now()+'_'+Math.random().toString(36).slice(2,10));
+  var tries=0;
+  (function fire(){
+    if(typeof fbq!=='function'||!fbq.callMethod&&!fbq.queue){if(++tries<50)return setTimeout(fire,100)}
     try{
-      var raw=localStorage.getItem(STORAGE_KEY);
-      if(!raw)return false;
-      var map=JSON.parse(raw);
-      if(id&&map[id])return true;
-      if(!id&&map._anon&&(Date.now()-map._anon)<86400000)return true;
-      return false;
-    }catch(e){return false}
-  }
-  function markFired(id){
-    try{
-      var map={};
-      try{map=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')||{}}catch(e){}
-      if(id)map[id]=Date.now();
-      else map._anon=Date.now();
-      localStorage.setItem(STORAGE_KEY,JSON.stringify(map));
+      fbq('track','Purchase',{value:99.00,currency:'INR',content_name:'Excel + AI Hindi Starter Pack',content_type:'product',content_ids:['excel-ai-hindi-starter']},{eventID:eventId});
+      try{localStorage.setItem(KEY,JSON.stringify({id:eventId,t:Date.now()}))}catch(e){}
     }catch(e){}
-  }
-  if(paymentId){
-    document.getElementById('pid').textContent=paymentId;
-    document.getElementById('pidLine').hidden=false;
-  }
-  if(!paymentId)return; // sirf asli payment redirect pe Purchase
-  if(alreadyFired(eventId))return;
-  var opts={};
-  if(eventId)opts.eventID=eventId;
-  try{
-    fbq('track','Purchase',{
-      value:99.00,
-      currency:'INR',
-      content_name:'Excel + AI Hindi Starter Pack',
-      content_type:'product',
-      contents:[{id:'excel-ai-hindi-starter',quantity:1}]
-    },opts);
-    markFired(eventId);
-  }catch(e){}
+  })();
 })();
 </script>
 </body></html>
