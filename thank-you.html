@@ -68,10 +68,11 @@ a{color:#0f6b3a}
 <p class="small" id="pidLine" hidden>Payment ID: <code id="pid"></code></p>
 <p class="small"><a href="./">← Wapas landing page</a></p>
 </div></div>
+<footer class="w" style="text-align:center;font-size:13px;margin:20px auto"><a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms</a> • <a href="refund.html">Refund Policy</a> • Contact: <a href="https://wa.me/919118606518">WhatsApp +91 9118606518</a> / <a href="mailto:bazarblast140@gmail.com">bazarblast140@gmail.com</a></footer>
 <script>
 (function(){
   var q=new URLSearchParams(location.search);
-  var paymentId=(q.get('razorpay_payment_id')||q.get('payment_id')||q.get('razorpay_order_id')||'').trim();
+  var paymentId=(q.get('razorpay_payment_id')||'').trim();
   var eventId=paymentId||'';
   var STORAGE_KEY='excel99_purchase_fired';
   function alreadyFired(id){
@@ -97,7 +98,8 @@ a{color:#0f6b3a}
     document.getElementById('pid').textContent=paymentId;
     document.getElementById('pidLine').hidden=false;
   }
-  if(alreadyFired(eventId||null))return;
+  if(!paymentId)return; // sirf asli payment redirect pe Purchase
+  if(alreadyFired(eventId))return;
   var opts={};
   if(eventId)opts.eventID=eventId;
   try{
@@ -108,7 +110,7 @@ a{color:#0f6b3a}
       content_type:'product',
       contents:[{id:'excel-ai-hindi-starter',quantity:1}]
     },opts);
-    markFired(eventId||null);
+    markFired(eventId);
   }catch(e){}
 })();
 </script>
