@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
-"""Static and local-server checks for the ₹99 Hindi pack delivery update.
+"""Static and local-server checks for the ₹99 Hindi pack v3 delivery.
 
-v2 product bytes are NOT release-ready. An Android viewer opened the v2 shop
-workbook and showed separated Hindi matras (dotted circles) plus horizontally
-clipped instruction lines. When corrected v3 files arrive, replace the files
-in pack/ AND the EXPECTED hashes below. Do not treat phone display as verified.
-
-Does not open Microsoft Excel or Google Sheets.
-Does not re-run the LibreOffice formula suite (reported 242/242 elsewhere).
+Hashes are the corrected v3 files. The only phone result recorded in the
+pages is one Microsoft Excel Android session of the shop workbook. This
+script does not open Excel, Google Sheets, or a phone, and it does not
+re-run the LibreOffice formula suite (reported 242/242 elsewhere).
 """
 from __future__ import annotations
 
@@ -28,50 +25,50 @@ PACK = ROOT / "pack"
 
 EXPECTED = {
     "01_Quick_Start.pdf": (
-        42237,
-        "960c937c6f438dfaacfe793056a610a10319900c5989c6bb1885dbf2afb245c7",
+        42499,
+        "57ddb0f4f8f50b344f5ee3001fa06a0bbda002be38fa7f970961fd590e1455f7",
         b"%PDF",
         "application/pdf",
     ),
     "02_Excel_AI_Hindi_Book.pdf": (
-        231511,
-        "0caab0cfc76a748c6dfb8e51a2b37d0b0ffd69c7e6a82e70aa45d98a8b14d371",
+        232147,
+        "969a35db032f4f0103214a575aaf81b8b76b4481ada0a3b887d51fdaa6abd0f4",
         b"%PDF",
         "application/pdf",
     ),
     "03_dukaan_bikri.xlsx": (
-        83851,
-        "0bcb6ef808987c44767aae1ac25d97a7fd9708b019f982880956353f78e9a832",
+        89333,
+        "144b52408e2ac9797d396bd1b5cf2114435176089b53edb06222d85845328b6e",
         b"PK\x03\x04",
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     ),
     "04_udhaar_khata.xlsx": (
-        108007,
-        "fa4c203f8223f4eb80cbce060ed8edb4309d6cc329248a54d9703e4b03160199",
+        112935,
+        "47b8b363eddac7afca200e5b1df9f3a9d96361178e0a438c12bb623324c1dac6",
         b"PK\x03\x04",
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     ),
     "05_ghar_budget.xlsx": (
-        17251,
-        "6f11f46b03a027419968e86a47f9add264a01d7836f07d66ceee12a5cb62270e",
+        20535,
+        "bb2e4134f5123c0fac338ef2ecd649f1e3faf0ca91f19b090e3d8f72cfa2c135",
         b"PK\x03\x04",
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     ),
     "06_attendance.xlsx": (
-        21391,
-        "4bf6711d48a6928040bcf6173b429e72927f812efe8d33d98ba9beae0f2e89cf",
+        23986,
+        "d4779df7602a8b55cdecb17d721b66a31cb90f2c6e5a2f64df4a14a97d93d3cf",
         b"PK\x03\x04",
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     ),
     "07_gst_invoice.xlsx": (
-        14196,
-        "11248df2822d0207c46fec2fe313e1a684b5a354cc603d249fe1282cb1af9d3f",
+        16803,
+        "9d90b44c46cd60c21de5b48d1ce5c66d626d73f4e5744ab7ffcf537724389779",
         b"PK\x03\x04",
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     ),
-    "Excel_AI_Hindi_Starter_Pack_v2.zip": (
-        394580,
-        "ec50d170b76dc9bd522ad9fc51e40d1ba90869e3da00fc641992dc4648f4fcb8",
+    "Excel_AI_Hindi_Starter_Pack_v3.zip": (
+        409543,
+        "6c472e468768f27b5cb18eb8d0555bbc5ade97269133ddbe0edb3ad240e51be4",
         b"PK\x03\x04",
         "application/zip",
     ),
@@ -85,14 +82,16 @@ PRIMARY = [
     ("05_ghar_budget.xlsx", "घर का बजट"),
     ("06_attendance.xlsx", "हाज़िरी रजिस्टर"),
     ("07_gst_invoice.xlsx", "GST इनवॉइस (सीखने का टेम्पलेट)"),
-    ("Excel_AI_Hindi_Starter_Pack_v2.zip", "पूरा पैक ZIP (कंप्यूटर के लिए)"),
+    ("Excel_AI_Hindi_Starter_Pack_v3.zip", "पूरा पैक ZIP (कंप्यूटर के लिए)"),
 ]
 
-OLD_FILES = [
-    "01_START_HERE.pdf",
-    "02_Excel_AI_Hindi_Starter_Guide.pdf",
-    "OPTIONAL_full_pack.zip",
-]
+# Older URLs now serve the corrected v3 bytes.
+COMPAT = {
+    "01_START_HERE.pdf": "01_Quick_Start.pdf",
+    "02_Excel_AI_Hindi_Starter_Guide.pdf": "02_Excel_AI_Hindi_Book.pdf",
+    "OPTIONAL_full_pack.zip": "Excel_AI_Hindi_Starter_Pack_v3.zip",
+    "Excel_AI_Hindi_Starter_Pack_v2.zip": "Excel_AI_Hindi_Starter_Pack_v3.zip",
+}
 
 SUPPORT = ("bazarblast140@gmail.com", "919118606518", "Rajesh Kumar")
 PIXEL = "1690255725618467"
@@ -146,20 +145,22 @@ def check_files() -> None:
         check(len(data) == size, f"size {name} {len(data)} == {size}")
         check(sha256(path) == digest, f"sha256 {name}")
         check(data.startswith(magic), f"magic {name}")
-    for name in OLD_FILES:
-        check((PACK / name).is_file(), f"old download still present {name}")
-    # v2 zip members are the seven individual files, byte-for-byte.
-    with zipfile.ZipFile(PACK / "Excel_AI_Hindi_Starter_Pack_v2.zip") as zf:
+    for old_name, new_name in COMPAT.items():
+        check((PACK / old_name).read_bytes() == (PACK / new_name).read_bytes(), f"old URL {old_name} serves corrected {new_name}")
+    with zipfile.ZipFile(PACK / "Excel_AI_Hindi_Starter_Pack_v3.zip") as zf:
         names = zf.namelist()
         check(names == [n for n, _ in PRIMARY[:-1]], f"zip member order {names}")
+        check(zf.testzip() is None, "v3 zip testzip")
         for info in zf.infolist():
             payload = zf.read(info)
             check(hashlib.sha256(payload).hexdigest() == EXPECTED[info.filename][1], f"zip member hash {info.filename}")
-    # Shop workbook states the catalogue-rate limitation in its own instructions.
-    shop_xml = zipfile.ZipFile(PACK / "03_dukaan_bikri.xlsx").read("xl/worksheets/sheet1.xml")
     ns = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
-    shop_text = "".join(t.text or "" for t in ET.fromstring(shop_xml).iter(ns + "t"))
+    shop = zipfile.ZipFile(PACK / "03_dukaan_bikri.xlsx")
+    check("xl/sharedStrings.xml" in shop.namelist(), "shop workbook uses shared strings")
+    check(not any(b"inlineStr" in shop.read(n) for n in shop.namelist() if n.startswith("xl/worksheets/")), "shop workbook has no inline strings")
+    shop_text = "".join(t.text or "" for t in ET.fromstring(shop.read("xl/sharedStrings.xml")).iter(ns + "t"))
     check("पुरानी लाइनों का Amount भी नए रेट से बदल जाएगा" in shop_text, "shop sheet warns that a new rate rewrites old amounts")
+    check("MERE_PRODUCT" in shop_text, "shop instructions use the v3 MERE_PRODUCT tab")
 
 
 def check_html(path: Path, prefix: str) -> None:
@@ -184,17 +185,18 @@ def check_html(path: Path, prefix: str) -> None:
         earlier = [hrefs.index(prefix + name) for name, _label in PRIMARY[:-1]]
         check(all(i < zip_at for i in earlier), f"{path.name} ZIP is after each individual file")
     check("noindex" in text, f"{path.name} stays noindex")
-    check("जारी करने लायक नहीं" in text, f"{path.name} marks v2 assets not release-ready")
-    check("Android viewer" in text and "dotted circles" in text, f"{path.name} records the Android shop-file failure")
-    check("सत्यापित नहीं" in text, f"{path.name} does not present phone display as verified")
-    for banned in ("Microsoft Excel ऐप में खोलें", "Edit दबाएँ", "phone par sahi dikhna verify ho chuka"):
-        check(banned not in text, f"{path.name} does not claim a verified phone open path ({banned})")
-    check("नए रेट से बदल" in text, f"{path.name} does not claim historical shop prices stay fixed")
+    check("फोन पर कैसे खोलें" in text, f"{path.name} has short Hindi open steps")
+    check("Microsoft Excel (Android) में सिर्फ़ दुकान बिक्री फ़ाइल" in text, f"{path.name} limits the phone result to the shop file")
+    check("P01" in text and "₹50" in text and "₹100" in text, f"{path.name} records the Excel Android shop check")
+    check("बाकी फ़ाइलें" in text, f"{path.name} says the other files were not in that phone check")
+    for banned in ("जारी करने लायक नहीं", "dotted circles", "release-ready", "सभी ऐप", "all apps"):
+        check(banned not in text, f"{path.name} does not keep the superseded v2 warning ({banned})")
+    check("MERE_PRODUCT" in text and "नए रेट से बदल" in text, f"{path.name} keeps the historical rate warning")
+    check("Excel_AI_Hindi_Starter_Pack_v3.zip" in text, f"{path.name} links the v3 zip")
     for token in ("countdown", "offer ends", "% off", "50% off", "<s>"):
         check(token not in text.lower(), f"{path.name} has no {token}")
-    # No second price. ₹99 is the only rupee amount.
     amounts = set(re.findall(r"₹\s*[0-9][0-9,]*", text))
-    check(amounts == {"₹99"}, f"{path.name} only rupee amount is ₹99, got {amounts}")
+    check(amounts <= {"₹99", "₹50", "₹100"} and "₹99" in amounts, f"{path.name} rupee amounts stay the product price plus the one checked example, got {amounts}")
 
 
 def check_pages() -> None:
@@ -211,12 +213,11 @@ def check_pages() -> None:
     check("https://wa.me/919118606518" in ty, "thank-you WhatsApp support kept")
     # Sales page must not grow a direct download of the paid files.
     check(not re.search(r'href="[^"]*(?:pack/|\.xlsx|\.pdf|\.zip)', landing), "landing has no file download link")
-    check("release-ready nahi" in landing and "dotted circles" in landing, "landing marks v2 assets not release-ready")
-    check("Phone par sahi dikhna verify nahi hua" in landing, "landing does not present phone display as verified")
-    check("Microsoft Excel app kholkar Edit" not in landing, "landing does not give an unverified phone edit path")
-    for name in OLD_FILES:
-        committed = subprocess.check_output(["git", "show", f"HEAD:pack/{name}"])
-        check(committed == (PACK / name).read_bytes(), f"old file bytes unchanged {name}")
+    check("sirf dukaan" in landing and "Microsoft Excel Android" in landing, "landing limits the phone result to Excel Android on the shop file")
+    check("₹50" in landing and "₹100" in landing, "landing records the checked shop amounts")
+    check("naye rate se badal sakta hai" in landing, "landing keeps the historical rate warning")
+    for banned in ("dotted circles", "release-ready", "verify nahi hua"):
+        check(banned not in landing, f"landing dropped superseded v2 wording ({banned})")
     check("Purchase" in ty and "if(!hasRzpParam&&!fromRzp&&!srcRzp)return" in ty, "Purchase pixel still gated on Razorpay signal")
     old = subprocess.check_output(["git", "show", "HEAD:thank-you.html"], text=True)
     old_scripts = re.findall(r"<script>(.*?)</script>", old, re.S)
@@ -258,6 +259,12 @@ def check_http() -> None:
                 check(ctype == mime, f"local MIME {name} {ctype} == {mime}")
                 check(body.startswith(magic), f"served magic {name}")
                 check(len(body) == _size, f"served size {name} {len(body)}")
+        for old_name, new_name in COMPAT.items():
+            url = f"http://127.0.0.1:{port}/pack/{old_name}"
+            with urllib.request.urlopen(url) as resp:
+                body = resp.read()
+                check(resp.status == 200, f"GET old URL {old_name} -> {resp.status}")
+                check(hashlib.sha256(body).hexdigest() == EXPECTED[new_name][1], f"old URL {old_name} hash matches {new_name}")
         for page in ("/thank-you.html", "/pack/", "/"):
             with urllib.request.urlopen(f"http://127.0.0.1:{port}{page}") as resp:
                 check(resp.status == 200, f"GET {page} -> {resp.status}")
