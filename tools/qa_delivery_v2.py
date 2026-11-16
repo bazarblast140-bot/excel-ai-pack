@@ -96,7 +96,7 @@ COMPAT = {
 SUPPORT = ("bazarblast140@gmail.com", "919118606518", "Rajesh Kumar")
 PIXEL = "1690255725618467"
 BUTTON = "pl_TuxhxMgITxpLb2"
-FALLBACK = "pl_ToaPkUzSQWDGHi"
+FALLBACK = "pl_TuxhxMgITxpLb2"
 
 failures: list[str] = []
 
