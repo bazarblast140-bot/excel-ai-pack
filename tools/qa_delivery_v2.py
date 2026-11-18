@@ -66,9 +66,15 @@ EXPECTED = {
         b"PK\x03\x04",
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     ),
+    "08_wine_shop_stock.xlsx": (
+        168742,
+        "dfae0128c821c21d8bd426aad3bbbd75004f2c362dd18194aab881677e5963df",
+        b"PK\x03\x04",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    ),
     "Excel_AI_Hindi_Starter_Pack_v3.zip": (
-        409543,
-        "6c472e468768f27b5cb18eb8d0555bbc5ade97269133ddbe0edb3ad240e51be4",
+        483165,
+        "0c3428d8c1a69489975e7c934263cd9a50dfec83f890085827e7f11e6c7c7535",
         b"PK\x03\x04",
         "application/zip",
     ),
@@ -82,6 +88,7 @@ PRIMARY = [
     ("05_ghar_budget.xlsx", "घर का बजट"),
     ("06_attendance.xlsx", "हाज़िरी रजिस्टर"),
     ("07_gst_invoice.xlsx", "GST इनवॉइस (सीखने का टेम्पलेट)"),
+    ("08_wine_shop_stock.xlsx", "वाइन / शराब दुकान स्टॉक रजिस्टर"),
     ("Excel_AI_Hindi_Starter_Pack_v3.zip", "पूरा पैक ZIP (कंप्यूटर के लिए)"),
 ]
 
